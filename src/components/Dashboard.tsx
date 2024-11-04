@@ -11,11 +11,11 @@ import { CompareProvider } from "../context/CompareSelectorsContext";
 import { getPrequalifiedLenders } from "../service/Httpcalls";
 import { calculateLoanRates } from "../utils";
 import type { User, Lender } from "../types";
-import { RootState, AppDispatch } from "../redux/store";
+import { RootState } from "../redux/store";
 import "../styles/components/dashboard.scss";
 
 const Dashboard = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const user: User | null = useSelector(
     (state: RootState) => state.user.currentUser
   );

@@ -64,31 +64,6 @@ export function calculateLoanRates(
   };
 }
 
-export function generateAmortizationData(
-  loanAmount: number,
-  apr: number,
-  term: number,
-  monthlyPayment: number
-) {
-  const monthlyRate = apr / 100 / 12;
-  const numberOfPayments = term * 12;
-  let balance = loanAmount;
-  const amortizationData = [];
-
-  for (let i = 1; i <= numberOfPayments; i++) {
-    const interest = balance * monthlyRate;
-    const principal = monthlyPayment - interest;
-    balance -= principal;
-
-    amortizationData.push({
-      date: new Date().getFullYear() + Math.floor(i / 12),
-      balance: balance > 0 ? balance : 0,
-    });
-  }
-
-  return amortizationData;
-}
-
 export function getModifiedColumnValueForRates(
   columnKey: string,
   value: number | string
@@ -111,39 +86,50 @@ export function formatAmountWithCommas(amount: number): string {
   return new Intl.NumberFormat("en-US").format(amount);
 }
 
-export function generateMonthlyData({
-  term,
-  apr,
-  monthlyPayment,
-}: {
-  term: number;
-  apr: number;
-  monthlyPayment: number;
-}) {
+export function generateMonthlyData(
+  lenderInfo: LenderWithCalculation,
+  requestedLoan: number
+) {
+  const { term, apr, monthlyPayment } = lenderInfo;
   const totalMonths = term * 12;
   const monthlyRate = apr / 100 / 12;
-  let remainingPrincipal = 50000;
+
+  let remainingPrincipal = requestedLoan;
+  let cumulativeInterestPaid = 0;
+  let cumulativePrincipalPaid = 0;
+
   const monthlyData = [];
 
   for (let month = 0; month < totalMonths; month++) {
+    // Calculate interest for the current month
     const interestPayment = remainingPrincipal * monthlyRate;
+    // Calculate principal payment for the current month
     const principalPayment = monthlyPayment - interestPayment;
-    remainingPrincipal -= principalPayment;
 
+    // Update cumulative totals
+    cumulativeInterestPaid += interestPayment;
+    cumulativePrincipalPaid += principalPayment;
+
+    // Reduce the remaining principal
+    remainingPrincipal -= principalPayment;
+    if (remainingPrincipal < 0) remainingPrincipal = 0;
+
+    // Generate the data point for this month
     monthlyData.push({
       x: new Date().setMonth(new Date().getMonth() + month),
       y: Math.max(remainingPrincipal, 0),
       amountRemaining: {
-        principal: Math.max(remainingPrincipal, 0).toFixed(2),
+        principal: remainingPrincipal.toFixed(2),
         interest: interestPayment.toFixed(2),
       },
       amountPaid: {
-        principal: principalPayment.toFixed(2),
-        interest: interestPayment.toFixed(2),
+        principal: cumulativePrincipalPaid.toFixed(2),
+        interest: cumulativeInterestPaid.toFixed(2),
       },
       avgMonthlyPayment: monthlyPayment.toFixed(2),
       timeUntilLoanPaidInDays: (totalMonths - month) * 30,
     });
   }
+
   return monthlyData;
 }

@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -14,7 +16,8 @@ import {
 import "chartjs-adapter-date-fns";
 import { generateMonthlyData } from "../utils";
 import { useCompare } from "../context/CompareSelectorsContext";
-import type { LenderWithCalculationAndColor } from "../types";
+import type { User, LenderWithCalculationAndColor } from "../types";
+import { RootState } from "../redux/store";
 import "../styles/components/compare.scss";
 
 ChartJS.register(
@@ -42,18 +45,29 @@ interface ExternalTooltipContext {
 }
 
 const PaymentsOverTimeChart = () => {
+  const user: User | null = useSelector(
+    (state: RootState) => state.user.currentUser
+  );
   const { compareSelectors } = useCompare();
+  const [data, setData] = useState<any>();
 
-  const data = {
-    datasets: compareSelectors.map((lender: LenderWithCalculationAndColor) => ({
-      label: `${lender.lender} (${lender.apr}%, ${lender.term} years)`,
-      data: generateMonthlyData(lender),
-      borderColor: lender.color,
-      backgroundColor: lender.color,
-      fill: false,
-      parsing: false,
-    })),
-  };
+  useEffect(() => {
+    if (user) {
+      const chartData = {
+        datasets: compareSelectors.map(
+          (lender: LenderWithCalculationAndColor) => ({
+            label: `${lender.lender} (${lender.apr}%, ${lender.term} years)`,
+            data: generateMonthlyData(lender, user?.requestedLoanAmount),
+            borderColor: lender.color,
+            backgroundColor: lender.color,
+            fill: false,
+            parsing: false,
+          })
+        ),
+      };
+      setData(chartData);
+    }
+  }, [compareSelectors]);
 
   const options: ChartOptions<"line"> = {
     responsive: true,
