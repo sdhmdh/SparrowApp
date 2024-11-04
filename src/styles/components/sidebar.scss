@@ -1,0 +1,88 @@
+@use '../abstracts/index' as *;
+
+.sidebar {
+    @include flex-column(flex-start, normal);
+    overflow: auto;
+    min-width: 200px;
+    padding: 40px 30px 20px;
+    z-index: 10;
+    background-color: #fff;
+    position: fixed;
+    height: calc(100vh - 60px);
+
+
+    .content {
+        margin: 20px 0;
+
+        .content__list {
+            @include flex-column(flex-start, normal);
+            gap: 25px;
+            list-style: none;
+            padding: 0;
+
+            li {
+                @include flex-row(flex-start, center);
+                cursor: pointer;
+                font-size: 15px;
+                color: #1e2534;
+                transition: all 0.4s;
+
+                span {
+                    margin-right: 8px;
+                    color: $primary-color;
+                }
+
+                a {
+                    @include flex-row(flex-start, center);
+                    text-decoration: underline;
+                    color: inherit;
+
+                    span {
+                        color: #9EA9B0;
+                    }
+                }
+
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+
+    .start-request {
+        @include primary-button;
+        padding: 12px;
+        border-radius: 32px;
+    }
+
+    @include apply-breakpoint(lg) {
+        position: fixed;
+        height: 100%;
+        transition: left 0.7s ease;
+        left: -280px;
+        z-index: 20;
+
+        &.view-mobile {
+            left: 0;
+
+        }
+    }
+}
+
+.sidebar-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #151b2680;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s;
+    z-index: 10;
+
+    &.view-mobile {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}

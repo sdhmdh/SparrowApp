@@ -1,0 +1,23 @@
+.custom-tooltip {
+    background-color: black;
+    padding: 12px 20px;
+    color: #fff !important;
+    border-radius: 8px;
+}
+
+.custom-tooltip.bar p.value {
+    font-weight: 700;
+    font-size: 14px !important;
+    color: #fff !important;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.custom-tooltip.bar p.label {
+    font-size: 11px !important;
+    padding: 0;
+    text-align: center;
+    color: #fff !important;
+    opacity: 0.8;
+}

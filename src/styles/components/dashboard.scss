@@ -1,0 +1,14 @@
+@use '../abstracts/index' as *;
+
+.dashboard-container {
+    position: relative;
+    width: calc(100% - 320px);
+    padding: 40px 30px;
+    padding-bottom: 0;
+    left: 260px;
+
+    @include apply-breakpoint(lg) {
+        width: 100%;
+        left: 0;
+    }
+}

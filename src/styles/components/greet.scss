@@ -1,0 +1,53 @@
+@use '../abstracts/index' as *;
+
+.greet-user {
+    @include flex-row(flex-start, flex-start);
+    color: #151B26;
+    gap: 28px;
+
+    >span {
+        margin-top: 5px;
+        cursor: pointer;
+        font-size: 20px;
+
+        @include apply-breakpoint(lg) {
+            display: none
+        }
+    }
+
+    .content {
+        @include flex-column(center, flex-start, wrap);
+        word-break: break-word;
+        font-size: 1.7rem;
+        gap: 12px;
+
+        h4 {
+            span {
+                color: $primary-hover;
+            }
+        }
+
+        p {
+            font-size: 1rem;
+            letter-spacing: 0.02rem;
+            color: #878F99;
+
+            a {
+                color: $primary-color;
+                text-decoration: none;
+
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+
+            @include apply-breakpoint(lg) {
+                display: none;
+            }
+        }
+
+        @include apply-breakpoint(lg) {
+            gap: 18px;
+        }
+    }
+}

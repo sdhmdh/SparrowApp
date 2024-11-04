@@ -1,0 +1,38 @@
+@use '../abstracts/index' as *;
+
+.detail-card-container {
+    width: 100%;
+    margin: 40px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+
+    .card-detail {
+        flex: 1;
+        height: 50px;
+        padding: 20px 16px;
+        background-color: #fff;
+        border-radius: 15px;
+        @include flex-column(space-between, flex-start);
+
+        .card-icon-text {
+            @include flex-row(flex-start, center);
+            color: $primary-color;
+            gap: 8px;
+            font-size: 20px;
+
+            span.text {
+                color: #878F99;
+                font-size: 14px;
+            }
+        }
+
+        @include apply-breakpoint(md) {
+            padding: 10px 14px;
+        }
+    }
+
+    @include apply-breakpoint(md) {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+}

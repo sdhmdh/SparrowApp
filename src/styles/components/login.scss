@@ -1,0 +1,41 @@
+@use '../abstracts/index' as *;
+
+.login-container {
+    @include flex-column(normal, center);
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+
+    .logo {
+        width: 60px;
+        height: 60px;
+        text-align: center;
+    }
+
+    .login-form {
+        input {
+            width: 300px;
+            outline: none;
+            color: #000;
+            box-sizing: border-box;
+            border: 2px solid $primary-color;
+            border-radius: 14px;
+            padding: 12px 8px;
+            font-size: 16px;
+            margin-top: 10px
+        }
+
+        button[type="submit"] {
+            @include primary-button;
+            padding: 15px;
+            border-radius: 14px;
+            margin-top: 10px;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+@use '../abstracts/index' as *;
+
+.app-container {
+    .main-content {
+        @include flex-container(row, flex-start, flex-start);
+
+        @include apply-breakpoint(lg) {
+            @include flex-container(column, flex-start, flex-start);
+        }
+    }
+
+}

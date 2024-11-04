@@ -1,0 +1,44 @@
+@use '../abstracts/index' as *;
+
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .scroll-btn {
+        font-size: 1.5rem;
+        position: absolute;
+        top: 80px;
+        right: 20px;
+        transform: translateY(-50%);
+        color: #151b26;
+        opacity: 0.9;
+        border: none;
+        cursor: pointer;
+        z-index: 1;
+
+        :hover {
+            opacity: 0.8;
+        }
+    }
+
+    .left {
+        right: 35px;
+    }
+
+    .right {
+        right: 0;
+    }
+
+    .carousel-content {
+        @include flex-row(flex-start, center);
+        overflow: hidden;
+        scroll-behavior: smooth;
+        width: 100%;
+
+        @include apply-breakpoint(md) {
+            overflow-x: scroll;
+        }
+    }
+}

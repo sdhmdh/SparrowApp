@@ -1,0 +1,160 @@
+@use '../abstracts/index' as *;
+
+.rate-card {
+    width: 100%;
+    background: #fff;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    @include flex-row(space-between, center);
+
+    .rate-card-content {
+        @include flex-row(flex-start, center);
+        flex: 1;
+        gap: 12px;
+
+        .lender-logo {
+            height: 40px;
+            width: 40px;
+            object-fit: contain;
+
+            @include apply-breakpoint(md) {
+                height: 60px;
+                width: 60px;
+            }
+        }
+
+        .loan-details {
+            @include flex-row(flex-start, center);
+            flex: 1;
+
+            .lender {
+                @include flex-column(center, flex-start);
+                gap: 5px;
+                min-width: 140px;
+
+                p {
+                    color: #878F99;
+                    font-size: 0.8rem;
+                }
+
+                h2 {
+                    font-size: 1rem;
+                    color: #1e2534;
+                    font-weight: 700;
+
+                    @include apply-breakpoint(md) {
+                        font-size: 1.15rem;
+                    }
+                }
+
+                @include apply-breakpoint(md) {
+                    min-width: 0;
+                }
+            }
+
+            .loan-detail-columns-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                padding-left: 70px;
+                flex: 1;
+
+                .loan-detail-column {
+                    @include flex-column(center, flex-start);
+                    gap: 5px;
+                }
+
+                @include apply-breakpoint(md) {
+                    @include flex-row(flex-start, center);
+                    padding: 0;
+                    margin-top: 15px;
+                    gap: 30px;
+                    width: 100%;
+                }
+            }
+
+            h2 {
+                color: #878F99;
+                font-size: 0.8rem;
+            }
+
+            @include apply-breakpoint(md) {
+                @include flex-column(center, flex-start);
+                width: 100%;
+            }
+        }
+
+        @include apply-breakpoint(md) {
+            width: 100%;
+            gap: 20px;
+        }
+    }
+
+    .rate-card-actions {
+        @include flex-row(space-between, center);
+        gap: 25px;
+        font-size: 1rem;
+
+        .action-item {
+            @include flex-row(center, center);
+            border: 1px solid #dcdcdc;
+            padding: 4px;
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+
+            img {
+                position: absolute;
+            }
+
+            img.compare {
+                height: 25px;
+                width: 25px;
+                height: 25px;
+                width: 25px;
+                position: absolute;
+                top: 4px;
+                right: 4px;
+            }
+
+            img.bookmark {
+                height: 20px;
+                width: 20px;
+            }
+        }
+
+        .apply-to-loan-btn {
+            @include primary-button;
+            width: min-content;
+            padding: 8px 16px;
+            border-radius: 15px;
+            font-weight: 400;
+        }
+
+        @include apply-breakpoint(md) {
+            width: 100%;
+            flex-direction: row-reverse;
+
+            .apply-to-loan-btn {
+                flex: 1;
+            }
+        }
+
+    }
+
+    h2 {
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+    @include apply-breakpoint(md) {
+        @include flex-column(center, flex-start);
+        gap: 20px;
+        padding-top: 20px;
+    }
+}

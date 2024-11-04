@@ -1,0 +1,68 @@
+@use '../abstracts/index' as *;
+
+.navbar {
+    display: none;
+    width: 100%;
+    padding: 40px 40px 24px 20px;
+    background-color: #fff;
+
+    .navbar__hamburger {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        position: relative;
+        cursor: pointer;
+
+        .navbar__hamburger-checkbox {
+            display: none;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .navbar__hamburger-lines {
+            height: 0;
+            display: block;
+            width: 28px;
+            background-color: transparent;
+            position: relative;
+            top: 5px;
+
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                width: 28px;
+                height: 3px;
+                background-color: $primary-color;
+                border-radius: 8px;
+                transition: transform 0.3s ease;
+                top: 0;
+            }
+
+            &::before {
+                transform: translateY(-5px);
+            }
+
+            &::after {
+                transform: translateY(6px);
+            }
+        }
+
+        .navbar__hamburger-checkbox:checked+.navbar__hamburger-lines {
+            &::before {
+                transform: rotate(45deg) translateY(0);
+            }
+
+            &::after {
+                transform: rotate(-45deg) translateY(0);
+            }
+        }
+    }
+
+    @include apply-breakpoint(lg) {
+        @include flex-row(flex-start, flex-end);
+        gap: 28px;
+    }
+}

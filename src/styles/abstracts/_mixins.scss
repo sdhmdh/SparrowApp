@@ -1,0 +1,64 @@
+@use 'variables' as *;
+
+@mixin flex-container($direction: row, $justify: center, $align: center, $wrap: nowrap) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+    flex-wrap: $wrap;
+}
+
+@mixin center-flex {
+    @include flex-container(row, center, center);
+}
+
+@mixin flex-column($justify: center, $align: center, $wrap: nowrap) {
+    @include flex-container(column, $justify, $align, $wrap);
+}
+
+@mixin flex-row($justify: center, $align: center, $wrap: nowrap) {
+    @include flex-container(row, $justify, $align, $wrap);
+}
+
+@mixin apply-breakpoint($breakpoint) {
+    @if $breakpoint ==sm {
+        @media (max-width: #{$breakpoint-sm}) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint ==md {
+        @media (max-width: #{$breakpoint-md}) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint ==lg {
+        @media (max-width: #{$breakpoint-lg}) {
+            @content;
+        }
+    }
+
+    @else if $breakpoint ==xl {
+        @media (max-width: #{$breakpoint-xl}) {
+            @content;
+        }
+    }
+}
+
+@mixin primary-button() {
+    width: 100%;
+    background: $primary-color;
+    outline: none;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 4px;
+    padding: 12px;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
