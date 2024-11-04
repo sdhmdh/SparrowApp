@@ -47,11 +47,11 @@ export function calculateLoanRates(
     }
   );
 
-  // sorting lenders by APR, term in ascending order, and then total cost
+  // sorting lenders by total cost, APR, term in ascending order
   const sortedLenders = lendersWithCalculations.sort((a, b) => {
+    if (a.totalCost !== b.totalCost) return a.totalCost - b.totalCost;
     if (a.apr !== b.apr) return a.apr - b.apr;
-    if (a.term !== b.term) return a.term - b.term;
-    return a.totalCost - b.totalCost;
+    return a.term - b.term;
   });
 
   // split top 5 as best prequalified rates and rest as other rates
