@@ -1,10 +1,23 @@
+import { useNavigate } from "react-router-dom";
 import { useNavigation } from "../context/NavigationContext";
 import sparrowLogo from "../assets/sparrow.svg";
-import { ProductOutlined, QuestionCircleOutlined } from "@ant-design/icons";
+import {
+  ProductOutlined,
+  QuestionCircleOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 import "../styles/components/sidebar.scss";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const { isSidebarOpen, toggleSidebar } = useNavigation();
+
+  const onLogout = () => {
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
   return (
     <>
       <aside className={`sidebar ${isSidebarOpen ? "view-mobile" : ""}`}>
@@ -33,7 +46,10 @@ const Sidebar = () => {
             </li>
           </ul>
         </div>
-        <button className="start-request">Start a new request</button>
+        <button className="logout" onClick={onLogout}>
+          Logout
+          <LogoutOutlined style={{ marginLeft: 8 }} />
+        </button>
       </aside>
       <div
         className={`sidebar-bg ${isSidebarOpen ? "view-mobile" : ""} `}

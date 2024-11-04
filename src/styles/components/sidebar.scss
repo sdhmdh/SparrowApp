@@ -49,10 +49,16 @@
         }
     }
 
-    .start-request {
+    .logout {
         @include primary-button;
         padding: 12px;
         border-radius: 32px;
+        margin-top: auto;
+        margin-bottom: 40px;
+
+        @include apply-breakpoint(lg) {
+            margin-top: 0;
+        }
     }
 
     @include apply-breakpoint(lg) {
