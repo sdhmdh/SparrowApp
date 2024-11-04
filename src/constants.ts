@@ -91,7 +91,7 @@ export const lineChartData = [
 export const chartColors = [
   "#d0f400",
   "#00ffff",
-  "#ffb400",
+  "#33A6FF",
   "#92C5F9",
   "#F8AE54",
   "#876FD4",
@@ -104,5 +104,5 @@ export const chartColors = [
   "#33FFA6",
   "#FFA633",
   "#57FF33",
-  "#33A6FF",
+  "#ffb400",
 ];
